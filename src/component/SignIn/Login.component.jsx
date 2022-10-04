@@ -95,10 +95,8 @@ const Login = () => {
             name="password"
             fullWidth
             required
+            value={password}
             onChange={handleChange}
-            endAdorment={
-            <InputAdornments/>
-            }
           />
         
         <FormControlLabel

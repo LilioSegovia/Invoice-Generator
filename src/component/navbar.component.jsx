@@ -137,7 +137,7 @@ const Navigationbar = () => {
                 >
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
-                    to={`/${dage}`}
+                    to={`/`}
                   >
                     {dage}
                   </Link>
