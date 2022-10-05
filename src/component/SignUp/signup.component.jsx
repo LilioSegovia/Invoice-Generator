@@ -15,7 +15,6 @@ const paperStyle = {
 };
 
 const defaultFormFields = {
-  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -23,7 +22,7 @@ const defaultFormFields = {
 
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { email, password, confirmPassword } = formFields;
   const dispatch = useDispatch();
 
   const resetFormFields = () => {
@@ -39,7 +38,7 @@ const SignUp = () => {
     }
 
     try {
-      dispatch(signUpStart(email, password, displayName));
+      dispatch(signUpStart(email, password));
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -72,18 +71,7 @@ const SignUp = () => {
           <h2>Sign Up :D</h2>
         </Box>
         <form onSubmit={handleSubmit}>
-          <TextField
-            label="Display Name"
-            type="text"
-            onChange={handleChange}
-            name="displayName"
-            value={displayName}
-            variant="outlined"
-            fullWidth
-            margin="none"
-            required
-            helperText="Please enter your name" 
-          />
+          
           <TextField
             id="Email"
             label="Email"
