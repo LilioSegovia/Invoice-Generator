@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { signUpStart } from "../../store/user/user.action";
-import InputAdornments from "../hidePassword.component"
+
 
 const paperStyle = {
   padding: 20,

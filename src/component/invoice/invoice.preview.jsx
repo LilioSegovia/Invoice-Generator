@@ -6,7 +6,7 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-
+import Image from 'mui-image'
 
 import * as React from "react";
 
@@ -34,7 +34,7 @@ const InvoicePreview = ({
       <Container>
         <Grid container>
           <Grid item xs={7} mb={3} ml={3} justify="flex-end" mt={5}>
-            <img width={200} height={150} src={logo}/>
+            <Image width="200px" height="200px" src={logo}/>
             <Typography mt={ 1}>Invoice{" "}From:{invoiceFrom}</Typography>
             <Typography sx={{ width: 160, mt: 2 }}>Bill{" "}To:{" "}{billTo}</Typography>
 

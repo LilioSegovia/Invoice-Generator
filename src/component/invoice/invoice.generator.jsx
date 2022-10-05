@@ -15,15 +15,14 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import DatePicker from "react-datepicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { v4 as uuidv4 } from "uuid";
-
-
 import { useState, useRef } from "react";
-
+import Image from 'mui-image'
 import InvoicePreview from "./invoice.preview";
 import ReactToPrint from "react-to-print";
+
 
 const paperStyle = {
   width: "210mm",
@@ -48,8 +47,10 @@ const defaultFormFields = {
 
 function InvoiceGenerator() {
   const [showInvoice, setShowInvoice] = useState(false);
-  const [date, setDate] = React.useState();
-  const [dueDate, setDueDate] = React.useState();
+  const [date, setDate] = useState();
+  const [dueDate, setDueDate] = useState();
+  const [displayBox, setDisplayBox] = useState(true);
+
   const [logo, setLogo] = useState();
   function handleFile(e) {
     setLogo(URL.createObjectURL(e.target.files[0]));
@@ -182,12 +183,12 @@ function InvoiceGenerator() {
                   <Grid item mb={3} ml={3} justify="flex-end" mt={5}  >
                     <Box  mb={5} > 
 
-                      
-                  <img mt={5} src={logo}  width={200} height={150}/>
-
+                    <Container>
+                  <Image mt={5} src={logo} alt="" width="200px" height="200px" />
+                  </Container>
                     <Button variant="contained"  id="userImage" component="label"  >
                       Logo
-                      <input hidden accept="image/*" type="file" onChange={handleFile} />
+                      <input hidden accept="image/*" type="file" onChange={handleFile}  />
                       
                     </Button>
                     </Box >
@@ -226,22 +227,23 @@ function InvoiceGenerator() {
                         ),
                       }}
                     />
-                    <LocalizationProvider dateAdapter={AdapterMoment}>
-                      <MobileDatePicker
-                        id="date"
-                        type="date"
-                        label="Date"
-                        value={date}
-                        onChange={(newDate) => handleDate(newDate)}
-                        renderInput={(params) => (
-                          <TextField
-                            sx={{ width: 235, mt: 1 }}
-                            size="small"
-                            {...params}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                views={["day"]}
+                helperText={null}
+                label="Date"
+                value={date}
+                onChange={(newDate) => handleDate(newDate)}
+                renderInput={(params) => (
+                  <TextField
+                    sx={{ width: 235, mt: 1 }}
+                    size="small"
+                    {...params}
+                  />
+                )}
+              />
+            </LocalizationProvider>
+
 
                     <TextField
                       label="PaymentTerms"
@@ -292,21 +294,21 @@ function InvoiceGenerator() {
                     justify="flex-end"
                     sx={{ ml: "auto" }}
                   >
-                    <LocalizationProvider dateAdapter={AdapterMoment}>
-                      <MobileDatePicker
-                        type="date"
-                        id="dueDate"
-                        label="Due Date"
-                        value={dueDate}
-                        onChange={(newDueDate) => handleDueDate(newDueDate)}
-                        renderInput={(params) => (
-                          <TextField
-                            sx={{ width: 235, mt: 1 }}
-                            size="small"
-                            {...params}
-                          />
-                        )}
-                      />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                views={["day"]}
+                helperText={null}
+                label="Due Date"
+                value={dueDate}
+                onChange={(newDueDate) => handleDueDate(newDueDate)}
+                renderInput={(params) => (
+                  <TextField
+                    sx={{ width: 235, mt: 1 }}
+                    size="small"
+                    {...params}
+                  />
+                )}
+              />
                     </LocalizationProvider>
                     <TextField
                       label="PoNumber"

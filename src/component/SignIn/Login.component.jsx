@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography, Grid } from "@mui/material";
+import { Box, Button, Paper, Grid } from "@mui/material";
 import { TextField, Link, FormControlLabel, Checkbox } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -8,15 +8,10 @@ import {
 } from "../../store/user/user.action";
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import InputAdornments from "../hidePassword.component"
 
 const defaultFormFields = {
   email: "",
   password: "",
-};
-
-const fieldSpace = {
-  margin: "8px 0 ",
 };
 
 const paperStyle = {

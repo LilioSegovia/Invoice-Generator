@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import { Link } from "react-router-dom";
@@ -18,7 +17,6 @@ import { signOutStart } from "../store/user/user.action";
 
 const pages = ["Login", "SignUp"];
 const sign = ["Logout"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navigationbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
