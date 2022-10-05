@@ -19,10 +19,9 @@ import DatePicker from "react-datepicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { v4 as uuidv4 } from "uuid";
 import { useState, useRef } from "react";
-import Image from 'mui-image'
+import Image from "mui-image";
 import InvoicePreview from "./invoice.preview";
 import ReactToPrint from "react-to-print";
-
 
 const paperStyle = {
   width: "210mm",
@@ -43,13 +42,12 @@ const defaultFormFields = {
   total: "",
   amountPaid: "",
   balanceDue: "",
+  date: "",
+  dueDate: "",
 };
 
 function InvoiceGenerator() {
   const [showInvoice, setShowInvoice] = useState(false);
-  const [date, setDate] = useState();
-  const [dueDate, setDueDate] = useState();
-  const [displayBox, setDisplayBox] = useState(true);
 
   const [logo, setLogo] = useState();
   function handleFile(e) {
@@ -58,14 +56,6 @@ function InvoiceGenerator() {
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), item: "", quantity: "", rate: "", amount: "" },
   ]);
-  const handleDate = (newDate) => {
-    let formattedDate = JSON.stringify(newDate);
-    setDate(formattedDate);
-  };
-  const handleDueDate = (newDueDate) => {
-    let formattedDueDate = JSON.stringify(newDueDate);
-    setDueDate(formattedDueDate);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -114,6 +104,8 @@ function InvoiceGenerator() {
     total,
     amountPaid,
     balanceDue,
+    date,
+    dueDate,
   } = formFields;
 
   const componentRef = useRef();
@@ -178,20 +170,33 @@ function InvoiceGenerator() {
         <div>
           <Container>
             <Paper elevation={8}>
-              <Box sx={{ flexGrow: 1 }} >
+              <Box sx={{ flexGrow: 1 }}>
                 <Grid container mt={3}>
-                  <Grid item mb={3} ml={3} justify="flex-end" mt={5}  >
-                    <Box  mb={5} > 
-
-                    <Container>
-                  <Image mt={5} src={logo} alt="" width="200px" height="200px" />
-                  </Container>
-                    <Button variant="contained"  id="userImage" component="label"  >
-                      Logo
-                      <input hidden accept="image/*" type="file" onChange={handleFile}  />
-                      
-                    </Button>
-                    </Box >
+                  <Grid item mb={3} ml={3} justify="flex-end" mt={5}>
+                    <Box mb={5}>
+                      <Container>
+                        <Image
+                          mt={5}
+                          src={logo}
+                          alt=""
+                          width="200px"
+                          height="200px"
+                        />
+                      </Container>
+                      <Button
+                        variant="contained"
+                        id="userImage"
+                        component="label"
+                      >
+                        Logo
+                        <input
+                          hidden
+                          accept="image/*"
+                          type="file"
+                          onChange={handleFile}
+                        />
+                      </Button>
+                    </Box>
                     <TextField
                       label="Invoice From"
                       type="text"
@@ -227,23 +232,15 @@ function InvoiceGenerator() {
                         ),
                       }}
                     />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                views={["day"]}
-                helperText={null}
-                label="Date"
-                value={date}
-                onChange={(newDate) => handleDate(newDate)}
-                renderInput={(params) => (
-                  <TextField
-                    sx={{ width: 235, mt: 1 }}
-                    size="small"
-                    {...params}
-                  />
-                )}
-              />
-            </LocalizationProvider>
 
+                    <TextField
+                      name="date"
+                      value={date}
+                      type="date"
+                      onChange={handleChange}
+                      size="small"
+                      sx={{ width: 235, mt: 1 }}
+                    />
 
                     <TextField
                       label="PaymentTerms"
@@ -259,7 +256,7 @@ function InvoiceGenerator() {
                     />
                   </Grid>
                 </Grid>
-                <Grid container  >
+                <Grid container>
                   <Grid item xs={7} pl={3} justify="flex-start">
                     <TextField
                       label="Bill To"
@@ -294,22 +291,15 @@ function InvoiceGenerator() {
                     justify="flex-end"
                     sx={{ ml: "auto" }}
                   >
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                views={["day"]}
-                helperText={null}
-                label="Due Date"
-                value={dueDate}
-                onChange={(newDueDate) => handleDueDate(newDueDate)}
-                renderInput={(params) => (
-                  <TextField
-                    sx={{ width: 235, mt: 1 }}
-                    size="small"
-                    {...params}
-                  />
-                )}
-              />
-                    </LocalizationProvider>
+                    <TextField
+                      name="dueDate"
+                      value={dueDate}
+                      type="date"
+                      onChange={handleChange}
+                      size="small"
+                      sx={{ width: 235, mt: 1 }}
+                    />
+
                     <TextField
                       label="PoNumber"
                       type="text"
