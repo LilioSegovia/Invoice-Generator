@@ -48,12 +48,12 @@ const InvoicePreview = ({
               INVOICE
             </Typography>
 
-            <Typography sx={{ mt: 7, ml: 6.5 }}>Invoice # {invoiceNumber}</Typography>
+            <Typography sx={{ mt: 7, ml: 6 }}>Invoice # {invoiceNumber}</Typography>
 
-            <Typography sx={{ mt: 1, ml: 6.5 }}>Invoice Date:{" "}{date}</Typography>
-            <Typography sx={{ mt: 1 ,ml: 6.5 }}>Due{" "}Date:{" "}{dueDate}</Typography>
+            <Typography sx={{ mt: 1, ml: 6 }}>Date:{" "}{date}</Typography>
+            <Typography sx={{ mt: 1 ,ml: 6, width: 235 }}>Due{" "}Date:{" "}{dueDate}</Typography>
 
-            <Typography sx={{ mt: 1, ml: 6.5 }}>PaymentTerms:{" "}{paymentTerms}</Typography>
+            <Typography sx={{ mt: 1, ml: 6 }}>PaymentTerms:{" "}{paymentTerms}</Typography>
           </Grid>
         </Grid>
 
