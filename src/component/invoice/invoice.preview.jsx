@@ -50,10 +50,10 @@ const InvoicePreview = ({
 
             <Typography sx={{ mt: 7, ml: 6 }}>Invoice # {invoiceNumber}</Typography>
 
-            <Typography sx={{ mt: 1, ml: 6 }}>Date:{" "}{date}</Typography>
+            <Typography sx={{ mt: 1, ml: 10, width: 235 }}>Date:{" "}{date}</Typography>
             <Typography sx={{ mt: 1 ,ml: 6, width: 235 }}>Due{" "}Date:{" "}{dueDate}</Typography>
 
-            <Typography sx={{ mt: 1, ml: 6 }}>PaymentTerms:{" "}{paymentTerms}</Typography>
+            <Typography sx={{ mt: 1, ml: 1 }}>PaymentTerms:{" "}{paymentTerms}</Typography>
           </Grid>
         </Grid>
 
@@ -139,9 +139,6 @@ const InvoicePreview = ({
                   value={inputField.rate}
                   InputProps={{
                     readOnly: true,
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
                   }}
                 />
 
@@ -163,32 +160,33 @@ const InvoicePreview = ({
         <Grid container mt={5}>
           <Grid item xs={7} mt={2.5} ml={3} mb={10}>
             <Typography justify="flex-start" sx={{ width: 540, mt: 1 }}>
+              Notes:{" "}
               {notes}
             </Typography>
 
-            <Typography justify="flex-start" sx={{ width: 540, mt: 1 }}>
+            <Typography justify="flex-start" sx={{ width: 540, mt: 10 }}>
+              Terms:{" "}
               {terms}
             </Typography>
           </Grid>
           <Grid item xs={4} justify="flex-end" mt={1}>
             
-            <Typography size="small" sx={{ mt: 1 }}>
-              Subtotal: ${subtotal}
+            <Typography size="small" sx={{ mt: 1, ml: 4.5 }}>
+              Subtotal:{" "}{subtotal}
+            </Typography>
+            
+            <Typography size="small" sx={{ mt: 1, ml: 8 }}>
+              Tax:{" "}{tax}
+            </Typography>
+            <Typography size="small" sx={{ mt: 1, ml: 7 }}>
+              Total:{" "}{total}
             </Typography>
             
             <Typography size="small" sx={{ mt: 1 }}>
-              Tax: ${tax}
+             Amount{" "}Paid:{" "}{amountPaid}
             </Typography>
             <Typography size="small" sx={{ mt: 1 }}>
-              Total: ${total}
-            </Typography>
-            <InputBase placeholder="Amount Paid" sx={{ width: 100, mt: 1.5 }} />
-            <Typography size="small" sx={{ mt: 1 }}>
-              {amountPaid}
-            </Typography>
-            <InputBase placeholder="Balance Due" sx={{ width: 100, mt: 1.5 }} />
-            <Typography size="small" sx={{ mt: 1 }}>
-              {balanceDue}
+             Balance{" "}Due:{" "}{balanceDue}
             </Typography>
           </Grid>
         </Grid>

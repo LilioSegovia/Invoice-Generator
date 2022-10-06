@@ -13,10 +13,6 @@ import * as React from "react";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import DatePicker from "react-datepicker";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { v4 as uuidv4 } from "uuid";
 import { useState, useRef } from "react";
 import Image from "mui-image";
@@ -389,13 +385,6 @@ function InvoiceGenerator() {
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
                             }
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  $
-                                </InputAdornment>
-                              ),
-                            }}
                           />
 
                           <TextField
@@ -425,7 +414,15 @@ function InvoiceGenerator() {
                 <Grid pl={3}></Grid>
                 <Grid container mt={5}>
                   <Grid item xs={7} mt={2.5} ml={3} mb={10}>
-                    <InputBase id="Notes" label="Notes" placeholder="Notes" />
+                    <InputBase
+                      id="Notes"
+                      defaultValue="Notes"
+                      
+                      placeholder="Notes"
+                      inputProps={{
+                        readOnly: true,
+                      }}
+                    />
                     <TextField
                       justify="flex-start"
                       rows={2}
@@ -439,9 +436,12 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       id="Terms"
-                      label="Terms"
+                      defaultValue="Terms"
                       placeholder="Terms"
                       sx={{ mt: 5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
                     />
                     <TextField
                       justify="flex-start"
@@ -458,7 +458,12 @@ function InvoiceGenerator() {
                   <Grid item xs={4} justify="flex-end" mt={1}>
                     <InputBase
                       placeholder="Subtotal"
+                      defaultValue="Subtotal"
+
                       sx={{ width: 100, mt: 1.5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
                     />
                     <TextField
                       size="small"
@@ -468,7 +473,14 @@ function InvoiceGenerator() {
                       value={subtotal}
                       onChange={handleChange}
                     />
-                    <InputBase placeholder="Tax" sx={{ width: 100, mt: 1.5 }} />
+                    <InputBase
+                      placeholder="Tax"
+                      defaultValue="Tax"
+                      sx={{ width: 100, mt: 1.5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
+                    />
                     <TextField
                       size="small"
                       sx={{ mt: 1 }}
@@ -479,7 +491,11 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       placeholder="Total"
+                      defaultValue="Total :"
                       sx={{ width: 100, mt: 1.5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
                     />
                     <TextField
                       size="small"
@@ -491,7 +507,11 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       placeholder="Amount Paid"
+                      defaultValue="Amount Paid"
                       sx={{ width: 100, mt: 1.5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
                     />
                     <TextField
                       size="small"
@@ -503,7 +523,11 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       placeholder="Balance Due"
+                      defaultValue="Balance Due"
                       sx={{ width: 100, mt: 1.5 }}
+                      inputProps={{
+                        readOnly: true,
+                      }}
                     />
                     <TextField
                       size="small"
