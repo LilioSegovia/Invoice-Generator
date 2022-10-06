@@ -457,12 +457,18 @@ function InvoiceGenerator() {
                   </Grid>
                   <Grid item xs={4} justify="flex-end" mt={1}>
                     <InputBase
-                      placeholder="Subtotal"
-                      defaultValue="Subtotal"
+                      placeholder="Subtotal "
+                      defaultValue="Subtotal "
 
                       sx={{ width: 100, mt: 1.5 }}
                       inputProps={{
                         readOnly: true,
+                        sx: {
+                          textAlign: "right",
+                          "&::placeholder": {
+                            textAlign: "right",
+                          },
+                        },
                       }}
                     />
                     <TextField
@@ -475,10 +481,16 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       placeholder="Tax"
-                      defaultValue="Tax"
+                      defaultValue="Tax "
                       sx={{ width: 100, mt: 1.5 }}
                       inputProps={{
                         readOnly: true,
+                        sx: {
+                          textAlign: "right",
+                          "&::placeholder": {
+                            textAlign: "right",
+                          },
+                        },
                       }}
                     />
                     <TextField
@@ -491,10 +503,16 @@ function InvoiceGenerator() {
                     />
                     <InputBase
                       placeholder="Total"
-                      defaultValue="Total :"
+                      defaultValue="Total "
                       sx={{ width: 100, mt: 1.5 }}
                       inputProps={{
                         readOnly: true,
+                        sx: {
+                          textAlign: "right",
+                          "&::placeholder": {
+                            textAlign: "right",
+                          },
+                        },
                       }}
                     />
                     <TextField
