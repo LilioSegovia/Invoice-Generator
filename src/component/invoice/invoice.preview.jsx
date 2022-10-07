@@ -147,7 +147,7 @@ const InvoicePreview = ({
                   type="text"
                   name="amount"
                   sx={{ width: 100 }}
-                  value={inputField.amount}
+                  value={(inputField.quantity) * (inputField.rate)}
                   InputProps={{
                     readOnly: true,
                   }}

@@ -217,6 +217,7 @@ function InvoiceGenerator() {
                     </Typography>
                     <TextField
                       size="small"
+                      type="number"
                       name="invoiceNumber"
                       value={invoiceNumber}
                       onChange={handleChange}
@@ -367,8 +368,8 @@ function InvoiceGenerator() {
 
                           <TextField
                             size="small"
-                            type="text"
                             name="quantity"
+                            type="number"
                             sx={{ width: 130 }}
                             value={inputField.quantity}
                             onChange={(event) =>
@@ -378,8 +379,8 @@ function InvoiceGenerator() {
 
                           <TextField
                             size="small"
-                            type="text"
                             name="rate"
+                            type="number"
                             sx={{ width: 130 }}
                             value={inputField.rate}
                             onChange={(event) =>
@@ -389,10 +390,10 @@ function InvoiceGenerator() {
 
                           <TextField
                             size="small"
-                            type="text"
+                            type="number"
                             name="amount"
                             sx={{ width: 130 }}
-                            value={inputField.amount}
+                            value={inputField.quantity * inputField.rate}
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
                             }
@@ -417,7 +418,6 @@ function InvoiceGenerator() {
                     <InputBase
                       id="Notes"
                       defaultValue="Notes"
-                      
                       placeholder="Notes"
                       inputProps={{
                         readOnly: true,
@@ -459,7 +459,6 @@ function InvoiceGenerator() {
                     <InputBase
                       placeholder="Subtotal "
                       defaultValue="Subtotal "
-
                       sx={{ width: 100, mt: 1.5 }}
                       inputProps={{
                         readOnly: true,
@@ -476,6 +475,7 @@ function InvoiceGenerator() {
                       sx={{ mt: 1 }}
                       id="subtotal"
                       name="subtotal"
+                      type="number"
                       value={subtotal}
                       onChange={handleChange}
                     />
@@ -497,6 +497,7 @@ function InvoiceGenerator() {
                       size="small"
                       sx={{ mt: 1 }}
                       name="tax"
+                      type="number"
                       id="tax"
                       value={tax}
                       onChange={handleChange}
@@ -520,6 +521,7 @@ function InvoiceGenerator() {
                       sx={{ mt: 1 }}
                       name="total"
                       id="total"
+                      type="number"
                       value={total}
                       onChange={handleChange}
                     />
@@ -536,6 +538,7 @@ function InvoiceGenerator() {
                       sx={{ mt: 1 }}
                       name="amountPaid"
                       id="amountPaid"
+                      type="number"
                       value={amountPaid}
                       onChange={handleChange}
                     />
@@ -551,6 +554,7 @@ function InvoiceGenerator() {
                       size="small"
                       sx={{ mt: 1 }}
                       name="balanceDue"
+                      type="number"
                       id="balanceDue"
                       value={balanceDue}
                       onChange={handleChange}
