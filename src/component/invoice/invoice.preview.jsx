@@ -62,16 +62,17 @@ const InvoicePreview = ({
               Due Date: {dueDate}
             </Typography>
 
-            <Typography sx={{ mt: 1, ml: 1 }}>
+            <Typography sx={{ mt: 1, ml: 1, width: 235 }}>
               PaymentTerms: {paymentTerms}
             </Typography>
+            <Typography sx={{ mt: 1, ml: 4, width: 235 }}>PO Number:{" "}{poNumber}</Typography>
           </Grid>
         </Grid>
 
         <Grid container>
           <Grid item xs pl={3} justify="flex-start"></Grid>
           <Grid item mt={1} justify="flex-end">
-            <Typography sx={{ mt: 1 }}>{poNumber}</Typography>
+
           </Grid>
         </Grid>
         <Grid container mt={2}>
