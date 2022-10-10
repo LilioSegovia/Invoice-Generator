@@ -18,6 +18,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "mui-image";
 import InvoicePreview from "./invoice.preview";
 import ReactToPrint from "react-to-print";
+import { NumericFormat } from "react-number-format";
 
 const paperStyle = {
   width: "211mm",
@@ -41,8 +42,6 @@ let defaultFormFields = {
 };
 
 function InvoiceGenerator() {
-
-
   const [showInvoice, setShowInvoice] = useState(false);
 
   const [logo, setLogo] = useState();
@@ -107,24 +106,22 @@ function InvoiceGenerator() {
   const componentRef = useRef();
 
   useEffect(() => {
-    inputFields.map(field => {
-      field.amount = field.rate * field.quantity
-    })
+    inputFields.map((field) => {
+      field.amount = field.rate * field.quantity;
+    });
 
     let subtotal = inputFields.reduce((accumulator, field) => {
-      return accumulator + field.amount
-    }, 0)
+      return accumulator + field.amount;
+    }, 0);
 
-    setFormFields({...formFields, subtotal})
-
-  }, [inputFields])
+    setFormFields({ ...formFields, subtotal });
+  }, [inputFields]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
   };
-
 
   return (
     <div mt={2}>
@@ -394,6 +391,13 @@ function InvoiceGenerator() {
                           <TextField
                             size="small"
                             name="rate"
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  $
+                                </InputAdornment>
+                              ),
+                            }}
                             type="number"
                             sx={{ width: 130 }}
                             value={inputField.rate}
@@ -402,15 +406,20 @@ function InvoiceGenerator() {
                             }
                           />
 
-                          <TextField
+                          <NumericFormat
                             size="small"
-                            type="number"
                             name="amount"
+                            prefix={"$"}
+                            customInput={TextField}
+                            thousandSeparator
                             sx={{ width: 130 }}
                             value={inputField.quantity * inputField.rate}
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
                             }
+                            inputProps={{
+                              readOnly: true,
+                            }}
                           />
                           <IconButton
                             disabled={inputFields.length === 1}
@@ -484,14 +493,18 @@ function InvoiceGenerator() {
                         },
                       }}
                     />
-                    <TextField
+                    <NumericFormat
                       size="small"
+                      prefix={"$"}
+                      customInput={TextField}
+                      thousandSeparator
                       sx={{ mt: 1 }}
                       id="subtotal"
                       name="subtotal"
-                      type="number"
                       value={subtotal}
-                      
+                      inputProps={{
+                        readOnly: true,
+                      }}
                       onChange={handleChange}
                     />
                     <InputBase
@@ -510,12 +523,15 @@ function InvoiceGenerator() {
                     />
                     <TextField
                       size="small"
-                      sx={{ mt: 1 }}
+                      sx={{ mt: 1, width: 235 }}
                       name="tax"
                       type="number"
                       id="tax"
-                      endAdornment={<InputAdornment position="end">%</InputAdornment>}
-                      min="1" max="100"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">%</InputAdornment>
+                        ),
+                      }}
                       value={tax}
                       onChange={handleChange}
                     />
@@ -533,16 +549,20 @@ function InvoiceGenerator() {
                         },
                       }}
                     />
-                    <TextField
+                    <NumericFormat
                       size="small"
                       sx={{ mt: 1 }}
+                      prefix={"$"}
+                      customInput={TextField}
+                      thousandSeparator
                       name="total"
                       id="total"
-                      type="number"
-                      value={total = ((subtotal * tax) / 100) + subtotal }
+                      inputProps={{
+                        readOnly: true,
+                      }}
+                      value={(total = (subtotal * tax) / 100 + subtotal)}
                       onChange={handleChange}
                     />
-                  
                   </Grid>
                 </Grid>
               </Box>

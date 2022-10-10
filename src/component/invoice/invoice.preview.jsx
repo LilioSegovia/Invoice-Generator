@@ -6,7 +6,8 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import Image from 'mui-image'
+import Image from "mui-image";
+import { NumericFormat } from "react-number-format";
 
 import * as React from "react";
 
@@ -27,18 +28,20 @@ const InvoicePreview = ({
   date,
   dueDate,
   inputFields,
-  logo
+  logo,
 }) => {
   return (
     <div>
       <Container>
         <Grid container>
           <Grid item xs={7} mb={3} ml={3} justify="flex-end" mt={5}>
-            <Image width="200px" height="200px" src={logo}/>
-            <Typography mt={ 1}>Invoice{" "}From:{invoiceFrom}</Typography>
-            <Typography sx={{ width: 160, mt: 2 }}>Bill{" "}To:{" "}{billTo}</Typography>
+            <Image width="200px" height="200px" src={logo} />
+            <Typography mt={1}>Invoice From:{invoiceFrom}</Typography>
+            <Typography sx={{ width: 160, mt: 2 }}>
+              Bill To: {billTo}
+            </Typography>
 
-            <Typography sx={{ width: 160, mt: 2}}>
+            <Typography sx={{ width: 160, mt: 2 }}>
               Ship To: {shipTo}
             </Typography>
           </Grid>
@@ -48,21 +51,26 @@ const InvoicePreview = ({
               INVOICE
             </Typography>
 
-            <Typography sx={{ mt: 7, ml: 6 }}>Invoice # {invoiceNumber}</Typography>
+            <Typography sx={{ mt: 7, ml: 6 }}>
+              Invoice # {invoiceNumber}
+            </Typography>
 
-            <Typography sx={{ mt: 1, ml: 10, width: 235 }}>Date:{" "}{date}</Typography>
-            <Typography sx={{ mt: 1 ,ml: 6, width: 235 }}>Due{" "}Date:{" "}{dueDate}</Typography>
+            <Typography sx={{ mt: 1, ml: 10, width: 235 }}>
+              Date: {date}
+            </Typography>
+            <Typography sx={{ mt: 1, ml: 6, width: 235 }}>
+              Due Date: {dueDate}
+            </Typography>
 
-            <Typography sx={{ mt: 1, ml: 1 }}>PaymentTerms:{" "}{paymentTerms}</Typography>
+            <Typography sx={{ mt: 1, ml: 1 }}>
+              PaymentTerms: {paymentTerms}
+            </Typography>
           </Grid>
         </Grid>
 
         <Grid container>
-          <Grid item xs pl={3} justify="flex-start">
-            
-          </Grid>
+          <Grid item xs pl={3} justify="flex-start"></Grid>
           <Grid item mt={1} justify="flex-end">
-           
             <Typography sx={{ mt: 1 }}>{poNumber}</Typography>
           </Grid>
         </Grid>
@@ -131,7 +139,10 @@ const InvoicePreview = ({
                   }}
                 />
 
-                <TextField
+                <NumericFormat
+                  prefix={"$"}
+                  customInput={TextField}
+                  thousandSeparator
                   size="small"
                   type="text"
                   name="rate"
@@ -142,12 +153,15 @@ const InvoicePreview = ({
                   }}
                 />
 
-                <TextField
+                <NumericFormat
+                  prefix={"$"}
+                  customInput={TextField}
+                  thousandSeparator
                   size="small"
                   type="text"
                   name="amount"
                   sx={{ width: 100 }}
-                  value={(inputField.quantity) * (inputField.rate)}
+                  value={inputField.quantity * inputField.rate}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -160,26 +174,37 @@ const InvoicePreview = ({
         <Grid container mt={5}>
           <Grid item xs={7} mt={2.5} ml={3} mb={10}>
             <Typography justify="flex-start" sx={{ width: 540, mt: 1 }}>
-              Notes:{" "}
-              {notes}
+              Notes: {notes}
             </Typography>
 
             <Typography justify="flex-start" sx={{ width: 540, mt: 10 }}>
-              Terms:{" "}
-              {terms}
+              Terms: {terms}
             </Typography>
           </Grid>
           <Grid item xs={4} justify="flex-end" mt={1}>
-            
-            <Typography size="small" sx={{ mt: 1, ml: 4.5 }}>
-              Subtotal:{" "}{subtotal}
+            <Typography size="small" sx={{ mt: 1, ml: 4.7 }}>
+              Subtotal:{" "}<NumericFormat
+                      prefix={"$"}
+                      size="small"
+                      customInput={InputBase}
+                      thousandSeparator
+                      sx={{ width:100 }}
+                      value={subtotal}
+                    />
             </Typography>
-            
-            <Typography size="small" sx={{ mt: 1, ml: 8.5 }}>
-              Tax:{" "}{tax}%
+
+            <Typography size="small" sx={{ mt: 1, ml: 9 }}>
+              Tax: {tax} %
             </Typography>
             <Typography size="small" sx={{ mt: 1, ml: 8 }}>
-              Total:{" "}{total = ((subtotal * tax) / 100) + subtotal }
+              Total:{" "}<NumericFormat
+                      prefix={"$"}
+                      size="small"
+                      customInput={InputBase}
+                      thousandSeparator
+                      sx={{ width:100 }}
+                      value={(total = (subtotal * tax) / 100 + subtotal)}
+                    /> 
             </Typography>
           </Grid>
         </Grid>
