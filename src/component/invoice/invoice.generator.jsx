@@ -14,17 +14,17 @@ import IconButton from "@mui/material/IconButton";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { v4 as uuidv4 } from "uuid";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "mui-image";
 import InvoicePreview from "./invoice.preview";
 import ReactToPrint from "react-to-print";
 
 const paperStyle = {
-  width: "210mm",
-  height: "297mm",
+  width: "211mm",
+  height: "298mm",
 };
 
-const defaultFormFields = {
+let defaultFormFields = {
   invoiceFrom: "",
   billTo: "",
   shipTo: "",
@@ -33,16 +33,16 @@ const defaultFormFields = {
   invoiceNumber: "",
   terms: "",
   notes: "",
-  subtotal: "",
-  tax: "",
-  total: "",
-  amountPaid: "",
-  balanceDue: "",
+  subtotal: 0,
+  tax: 0,
+  total: 0,
   date: "",
   dueDate: "",
 };
 
 function InvoiceGenerator() {
+
+
   const [showInvoice, setShowInvoice] = useState(false);
 
   const [logo, setLogo] = useState();
@@ -86,7 +86,7 @@ function InvoiceGenerator() {
   };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const {
+  let {
     invoiceFrom,
     billTo,
     shipTo,
@@ -106,11 +106,25 @@ function InvoiceGenerator() {
 
   const componentRef = useRef();
 
+  useEffect(() => {
+    inputFields.map(field => {
+      field.amount = field.rate * field.quantity
+    })
+
+    let subtotal = inputFields.reduce((accumulator, field) => {
+      return accumulator + field.amount
+    }, 0)
+
+    setFormFields({...formFields, subtotal})
+
+  }, [inputFields])
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
   };
+
 
   return (
     <div mt={2}>
@@ -477,6 +491,7 @@ function InvoiceGenerator() {
                       name="subtotal"
                       type="number"
                       value={subtotal}
+                      
                       onChange={handleChange}
                     />
                     <InputBase
@@ -499,6 +514,8 @@ function InvoiceGenerator() {
                       name="tax"
                       type="number"
                       id="tax"
+                      endAdornment={<InputAdornment position="end">%</InputAdornment>}
+                      min="1" max="100"
                       value={tax}
                       onChange={handleChange}
                     />
@@ -522,43 +539,10 @@ function InvoiceGenerator() {
                       name="total"
                       id="total"
                       type="number"
-                      value={total}
+                      value={total = ((subtotal * tax) / 100) + subtotal }
                       onChange={handleChange}
                     />
-                    <InputBase
-                      placeholder="Amount Paid"
-                      defaultValue="Amount Paid"
-                      sx={{ width: 100, mt: 1.5 }}
-                      inputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                    <TextField
-                      size="small"
-                      sx={{ mt: 1 }}
-                      name="amountPaid"
-                      id="amountPaid"
-                      type="number"
-                      value={amountPaid}
-                      onChange={handleChange}
-                    />
-                    <InputBase
-                      placeholder="Balance Due"
-                      defaultValue="Balance Due"
-                      sx={{ width: 100, mt: 1.5 }}
-                      inputProps={{
-                        readOnly: true,
-                      }}
-                    />
-                    <TextField
-                      size="small"
-                      sx={{ mt: 1 }}
-                      name="balanceDue"
-                      type="number"
-                      id="balanceDue"
-                      value={balanceDue}
-                      onChange={handleChange}
-                    />
+                  
                   </Grid>
                 </Grid>
               </Box>

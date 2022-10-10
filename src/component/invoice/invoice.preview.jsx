@@ -175,18 +175,11 @@ const InvoicePreview = ({
               Subtotal:{" "}{subtotal}
             </Typography>
             
+            <Typography size="small" sx={{ mt: 1, ml: 8.5 }}>
+              Tax:{" "}{tax}%
+            </Typography>
             <Typography size="small" sx={{ mt: 1, ml: 8 }}>
-              Tax:{" "}{tax}
-            </Typography>
-            <Typography size="small" sx={{ mt: 1, ml: 7 }}>
-              Total:{" "}{total}
-            </Typography>
-            
-            <Typography size="small" sx={{ mt: 1 }}>
-             Amount{" "}Paid:{" "}{amountPaid}
-            </Typography>
-            <Typography size="small" sx={{ mt: 1 }}>
-             Balance{" "}Due:{" "}{balanceDue}
+              Total:{" "}{total = ((subtotal * tax) / 100) + subtotal }
             </Typography>
           </Grid>
         </Grid>
